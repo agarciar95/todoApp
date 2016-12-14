@@ -13,16 +13,17 @@
 </ion-header>
 
 <ion-content >
-  <ion-list no-lines>
-    <ion-item-sliding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let checklist of checklists">
+
       <button ion-item (click)="viewChecklist(checklist)">
-        AQUI UN TITULO
-        <span>0 tareas</span>
+        <h2>{{ checklist.title}}</h2>
+        <span>{{ checklist.items.length}} tareas</span>
       </button>
 
       <ion-item-options>
-        <button ion-button icon-only color="light" (click)="renemaChecklist(checklist)"><ion-icon name="clipboard"></ion-icon></button>
-        <button ion-button icon-only color="red" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon></button>
+        <button ion-button icon-only color="blue" (click)="renameChecklist(checklist)"><ion-icon name="clipboard"></ion-icon></button>
+        <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon></button>
       </ion-item-options>
 
     </ion-item-sliding>
