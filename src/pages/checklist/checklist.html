@@ -6,28 +6,32 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Checklist</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="uncheckItems()"><ion-icon name="refresh"></ion-icon></button>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
+
   </ion-navbar>
 
-  <ion-buttons end>
-    <button ion-button icon-only (click)="uncheckItems()"><ion-icon name="refresh"></ion-icon></button>
-    <button ion-button icon-only (click)="addItem()"><ion-icon name="add"></ion-icon></button>
-  </ion-buttons>
+
 </ion-header>
 
 
 <ion-content>
   <ion-list no-lines>
-    <ion-item-sliding>
-      <button ion-item (click)="viewChecklist(checklist)">
-        <ion-label>ITEM</ion-label>
-        <ion-checkbox [checked]="item.checked" (click)="toggleItem"></ion-checkbox>
+    <ion-item-sliding *ngFor="let item of checklist.items">
+      <button ion-item>
+        <ion-label>{{ item.title }}</ion-label>
+        <ion-checkbox [checked]="item.checked" (click)="toggleItem(item)"></ion-checkbox>
+        <!--<ion-checkbox  (click)="toggleItem"></ion-checkbox>-->
       </button>
 
       <ion-item-options>
-        <button ion-button icon-only color="light" (click)="renemaItem(item)"><ion-icon name="clipboard"></ion-icon></button>
-        <button ion-button icon-only color="red" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon></button>
+        <button ion-button icon-only color="blue" (click)="renameItem(item)"><ion-icon name="clipboard"></ion-icon></button>
+        <button ion-button icon-only color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon></button>
       </ion-item-options>
 
     </ion-item-sliding>
