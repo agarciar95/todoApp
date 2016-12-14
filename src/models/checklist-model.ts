@@ -18,7 +18,7 @@ export class ChecklistModel{
     this.items.push({
       title: item,
       checked: false
-    })
+    });
 
     this.checklistObserver.next(true);
   }
