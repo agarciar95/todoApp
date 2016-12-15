@@ -10,6 +10,9 @@ import { Datos } from '../../providers/datos';
 import { Keyboard } from 'ionic-native';
 import { IntroPage } from '../intro/intro';
 
+import {LocalNotifications} from 'ionic-native';
+import {NotificacionesPage} from "../notificaciones/notificaciones";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -69,6 +72,10 @@ export class HomePage {
       inputs: [
         {
           name: 'name'
+        },
+        {
+          name: 'date',
+          type: 'datetime-local'
         }
       ],
       buttons: [
@@ -137,6 +144,16 @@ export class HomePage {
     Keyboard.close();
     this.dataService.save(this.checklists);
 
+  }
+
+  public schedule() {
+    // LocalNotifications.schedule({
+    //   title: "Test Title",
+    //   text: "Delayed Notification",
+    //   at: new Date(new Date().getTime() + 5 * 1000),
+    //   sound: null
+    // });
+    this.navCtrl.push(NotificacionesPage);
   }
 
 }
