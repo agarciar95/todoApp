@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { IntroPage } from '../pages/intro/intro';
 import { ChecklistPage } from '../pages/checklist/checklist';
+import {NotificacionesPage} from "../pages/notificaciones/notificaciones";
 
 import { Datos } from '../providers/datos';
 import { Storage } from '@ionic/storage';
@@ -15,7 +16,8 @@ import { Storage } from '@ionic/storage';
     MyApp,
     HomePage,
     IntroPage,
-    ChecklistPage
+    ChecklistPage,
+    NotificacionesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -25,7 +27,8 @@ import { Storage } from '@ionic/storage';
     MyApp,
     HomePage,
     IntroPage,
-    ChecklistPage
+    ChecklistPage,
+    NotificacionesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Storage,Datos]
 })
