@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController,Platform, AlertController } from 'ionic-angular';
+import {NavController, Platform, AlertController, NavParams} from 'ionic-angular';
+import { ChecklistPage } from '../checklist/checklist';
 import * as moment from 'moment';
 import { LocalNotifications } from 'ionic-native';
 
@@ -15,14 +16,15 @@ import { LocalNotifications } from 'ionic-native';
 })
 export class NotificacionesPage {
 
+  item: any;
   notifyTime: any;
   notifications: any[] = [];
   days: any[];
   chosenHours: number;
   chosenMinutes: number;
 
-  constructor(public navCtrl: NavController, public platform: Platform, public alertCtrl: AlertController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public alertCtrl: AlertController) {
+    this.item = this.navParams.get('item');
     this.notifyTime = moment(new Date()).format();
 
     this.chosenHours = new Date().getHours();
@@ -70,10 +72,10 @@ export class NotificacionesPage {
 
         let notification = {
           id: day.dayCode,
-          title: 'Hey!',
-          text: 'You just got notified :)',
-          at: firstNotificationTime,
-          every: 'week'
+          title: 'No te olvides de:',
+          text: ''+this.item.title,
+          at: firstNotificationTime
+          // every: 'week'
         };
 
         this.notifications.push(notification);
@@ -96,8 +98,15 @@ export class NotificacionesPage {
         this.notifications = [];
 
         let alert = this.alertCtrl.create({
-          title: 'Notifications set: '+JSON.stringify(LocalNotifications.hasPermission()),
-          buttons: ['Ok']
+          title: 'Tu arlarma se ha activado.',
+          buttons: [
+            {
+              text:'Ok',
+              handler: () => {
+                this.goBack();
+              }
+            }
+          ]
         });
 
         alert.present();
@@ -119,6 +128,10 @@ export class NotificacionesPage {
     });
 
     alert.present();
+  }
+
+  goBack(){
+    this.navCtrl.pop();
   }
 
 }
