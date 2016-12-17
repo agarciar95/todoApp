@@ -72,10 +72,6 @@ export class HomePage {
       inputs: [
         {
           name: 'name'
-        },
-        {
-          name: 'date',
-          type: 'datetime-local'
         }
       ],
       buttons: [
@@ -95,6 +91,35 @@ export class HomePage {
         }
       ]
     });
+
+    // prompt.addInput({
+    //   name: 'color',
+    //   type: 'radio',
+    //   label: 'Azul',
+    //   value: '1',
+    //   checked: true
+    // });
+    //
+    // prompt.addInput({
+    //   name: 'color',
+    //   type: 'radio',
+    //   label: 'Amarillo',
+    //   value: '2'
+    // });
+    //
+    // prompt.addInput({
+    //   name: 'color',
+    //   type: 'radio',
+    //   label: 'Rojo',
+    //   value: '3'
+    // });
+    //
+    // prompt.addInput({
+    //   name: 'color',
+    //   type: 'radio',
+    //   label: 'Verde',
+    //   value: '4'
+    // });
 
     prompt.present();
   }
