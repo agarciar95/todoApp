@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
-
-import { NavController, AlertController, Platform } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { ToastController } from 'ionic-angular';
+import { NavController, AlertController, Platform, PopoverController, ToastController } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 import { ChecklistPage } from '../checklist/checklist';
 import { ChecklistModel } from '../../models/checklist-model';
 import { Datos } from '../../providers/datos';
-import { Keyboard } from 'ionic-native';
 import { IntroPage } from '../intro/intro';
+import { PopoverHomePage } from '../popover-home/popover-home';
 
-import {LocalNotifications} from 'ionic-native';
 import {NotificacionesPage} from "../notificaciones/notificaciones";
 
 @Component({
@@ -19,9 +17,12 @@ import {NotificacionesPage} from "../notificaciones/notificaciones";
 })
 export class HomePage {
 
+  @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
+  @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
+
   checklists: ChecklistModel[] = [];
 
-  constructor(public navCtrl: NavController, public dataService: Datos, public alertCtrl: AlertController,public storage: Storage, public platform: Platform, public toast: ToastController) {
+  constructor(public navCtrl: NavController, public dataService: Datos, public alertCtrl: AlertController,public storage: Storage, public platform: Platform, public toast: ToastController, private popoverCtrl: PopoverController) {
     this.navCtrl = navCtrl;
     this.dataService = dataService;
   }
@@ -92,35 +93,6 @@ export class HomePage {
       ]
     });
 
-    // prompt.addInput({
-    //   name: 'color',
-    //   type: 'radio',
-    //   label: 'Azul',
-    //   value: '1',
-    //   checked: true
-    // });
-    //
-    // prompt.addInput({
-    //   name: 'color',
-    //   type: 'radio',
-    //   label: 'Amarillo',
-    //   value: '2'
-    // });
-    //
-    // prompt.addInput({
-    //   name: 'color',
-    //   type: 'radio',
-    //   label: 'Rojo',
-    //   value: '3'
-    // });
-    //
-    // prompt.addInput({
-    //   name: 'color',
-    //   type: 'radio',
-    //   label: 'Verde',
-    //   value: '4'
-    // });
-
     prompt.present();
   }
 
@@ -156,13 +128,30 @@ export class HomePage {
   }
 
   removeChecklist(checklist):void{
-    let index = this.checklists.indexOf(checklist);
 
-    if(index > -1){
-      this.checklists.splice(index,1);
-      this.save();
-      this.presentToast("Lista removida!");
-    }
+    let prompt = this.alertCtrl.create({
+      title: 'Eliminar lista',
+      message: '¿Desea eliminar '+checklist.title+'?',
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Eliminar',
+          handler: ()=>{
+            let index = this.checklists.indexOf(checklist);
+
+            if(index > -1){
+              this.checklists.splice(index,1);
+              this.save();
+              this.presentToast("Lista removida!");
+            }
+          }
+        }
+      ]
+    });
+
+    prompt.present();
   }
 
   save():void{
@@ -179,6 +168,18 @@ export class HomePage {
     //   sound: null
     // });
     this.navCtrl.push(NotificacionesPage);
+  }
+
+  presentPopover(ev) {
+
+    let popover = this.popoverCtrl.create(PopoverHomePage, {
+      contentEle: this.content.nativeElement,
+      textEle: this.text.nativeElement
+    });
+
+    popover.present({
+      ev: ev
+    });
   }
 
 }
