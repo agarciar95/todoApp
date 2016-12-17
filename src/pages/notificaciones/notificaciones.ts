@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {NavController, Platform, AlertController, NavParams} from 'ionic-angular';
-import { ChecklistPage } from '../checklist/checklist';
 import * as moment from 'moment';
 import { LocalNotifications } from 'ionic-native';
 
