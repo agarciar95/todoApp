@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, AlertController, ToastController} from 'ionic-angular';
+import {NotificacionesPage} from "../notificaciones/notificaciones";
 
 /*
   Generated class for the Checklist page.
@@ -98,6 +99,34 @@ export class ChecklistPage {
         this.presentToast("Tareas Desmarcadas!");
       }
     })
+  }
+
+  scheduleAlarm(item):void{
+    // let prompt = this.alertCtrl.create({
+    //   title:'Agregar Alarma',
+    //   message: 'Selecciona la fecha y tiempo',
+    //   inputs: [
+    //     {
+    //       name:'date',
+    //       type:'datetime-local'
+    //     }
+    //   ],
+    //   buttons: [
+    //     {text: 'Cancelar'},
+    //     {
+    //       text: 'Agregar',
+    //       handler: data =>{
+    //         console.log(data.date);
+    //         // this.checklist.addItem(data.name);
+    //         // this.presentToast("Tarea agregada!");
+    //       }
+    //     }
+    //   ]
+    // });
+    //
+    // prompt.present();
+
+    this.navCtrl.push(NotificacionesPage,{'item':item});
   }
 
 }
