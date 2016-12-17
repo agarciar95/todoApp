@@ -1,0 +1,36 @@
+<!--
+  Generated template for the PopoverHome page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-list radio-group [(ngModel)]="fontFamily" (ionChange)="changeFontFamily()" class="popover-page">
+  <!--<ion-row>-->
+    <!--<ion-col>-->
+      <!--<button class="nav-buttons" ion-item detail-none icon-only (click)="addChecklist()"><ion-icon name="add"></ion-icon> Agregar lista</button>-->
+    <!--</ion-col>-->
+  <!--</ion-row>-->
+
+  <ion-row>
+    <ion-col>
+      <button (click)="changeFontSize('smaller')" ion-item detail-none class="text-button text-smaller">A</button>
+    </ion-col>
+    <ion-col>
+      <button (click)="changeFontSize('larger')" ion-item detail-none class="text-button text-larger">A</button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="row-dots">
+    <ion-col>
+      <button ion-button="dot" (click)="changeBackground('yellow')" class="dot-yellow" [class.selected]="background == 'yellow'"></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="dot" (click)="changeBackground('green')" class="dot-green" [class.selected]="background == 'green'"></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="dot" (click)="changeBackground('red')" class="dot-red" [class.selected]="background == 'red'"></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="dot" (click)="changeBackground('blue')" class="dot-blue" [class.selected]="background == 'blue'"></button>
+    </ion-col>
+  </ion-row>
+</ion-list>
