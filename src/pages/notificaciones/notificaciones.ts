@@ -17,15 +17,18 @@ export class NotificacionesPage {
 
   item: any;
   notifyTime: any;
+  date: any;
   notifications: any[] = [];
   days: any[];
   chosenHours: number;
   chosenMinutes: number;
+  chosenDays: number;
+  chosenMont: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public alertCtrl: AlertController) {
     this.item = this.navParams.get('item');
     this.notifyTime = moment(new Date()).format();
-
     this.chosenHours = new Date().getHours();
     this.chosenMinutes = new Date().getMinutes();
 
@@ -48,6 +51,12 @@ export class NotificacionesPage {
   timeChange(time){
     this.chosenHours = time.hour.value;
     this.chosenMinutes = time.minute.value;
+  }
+
+  timeChangeDate(date){
+    console.log(date);
+    this.chosenDays = date.day.value;
+    this.chosenMont = date.month.value;
   }
 
   addNotifications(){
