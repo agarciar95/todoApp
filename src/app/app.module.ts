@@ -6,7 +6,6 @@ import { HomePage } from '../pages/home/home';
 import { IntroPage } from '../pages/intro/intro';
 import { ChecklistPage } from '../pages/checklist/checklist';
 import { NotificacionesPage } from "../pages/notificaciones/notificaciones";
-import { PopoverHomePage } from '../pages/popover-home/popover-home';
 
 import { Datos } from '../providers/datos';
 import { Storage } from '@ionic/storage';
@@ -18,8 +17,7 @@ import { Storage } from '@ionic/storage';
     HomePage,
     IntroPage,
     ChecklistPage,
-    NotificacionesPage,
-    PopoverHomePage
+    NotificacionesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -30,8 +28,7 @@ import { Storage } from '@ionic/storage';
     HomePage,
     IntroPage,
     ChecklistPage,
-    NotificacionesPage,
-    PopoverHomePage
+    NotificacionesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Storage,Datos]
 })
