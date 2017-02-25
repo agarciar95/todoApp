@@ -23,10 +23,9 @@
 <ion-content class="content">
   <ion-list no-lines >
     <ion-item-sliding  *ngFor="let item of checklist.items">
-      <button ion-item class="group">
+      <button ion-item class="group" [ngClass]="checklist.color">
         <ion-label>{{ item.title }}</ion-label>
         <ion-checkbox [checked]="item.checked" (click)="toggleItem(item)"></ion-checkbox>
-        <!--<ion-checkbox  (click)="toggleItem"></ion-checkbox>-->
       </button>
 
       <ion-item-options class="group-options">

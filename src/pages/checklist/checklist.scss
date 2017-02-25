@@ -19,7 +19,6 @@ page-checklist {
     margin-top: 5px;
 
     .group {
-      background-color: #B4D8E7;
       border-color: #007aff;
       border: 10px;
       border-radius: 10px;
@@ -32,6 +31,12 @@ page-checklist {
         font-size: 14px;
         color: #0d3349;
         font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      }
+
+      .input-wrapper{
+        ion-label{
+          white-space: pre-wrap;
+        }
       }
 
       .items {
