@@ -5,7 +5,6 @@ page-home {
 
   .toolbar-title{
     color: white;
-
   }
 
   .nav-buttons{
@@ -20,7 +19,6 @@ page-home {
     margin-top: 5px;
 
     .group{
-      background-color: #B4D8E7;
       border-color: #007aff;
       border: 10px;
       border-radius: 10px;
@@ -54,6 +52,11 @@ page-home {
         box-shadow: 1px 2px 2px 1px #7f7f7f;
       }
       .option-2{
+        height: auto;
+        //border-radius: 0px 0px 0px 0px;
+        box-shadow: 1px 2px 2px 1px #7f7f7f;
+      }
+      .option-3{
         height: auto;
         border-radius: 0px 5px 5px 0px;
         box-shadow: 1px 2px 2px 1px #7f7f7f;

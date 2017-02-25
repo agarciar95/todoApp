@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import {Component, ViewChild, ElementRef, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, AlertController, Platform, PopoverController, ToastController } from 'ionic-angular';
 import { Keyboard } from 'ionic-native';
@@ -7,24 +7,21 @@ import { ChecklistPage } from '../checklist/checklist';
 import { ChecklistModel } from '../../models/checklist-model';
 import { Datos } from '../../providers/datos';
 import { IntroPage } from '../intro/intro';
-import { PopoverHomePage } from '../popover-home/popover-home';
-
-import {NotificacionesPage} from "../notificaciones/notificaciones";
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-
-  @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
-  @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
+export class HomePage implements AfterContentInit{
 
   checklists: ChecklistModel[] = [];
 
   constructor(public navCtrl: NavController, public dataService: Datos, public alertCtrl: AlertController,public storage: Storage, public platform: Platform, public toast: ToastController, private popoverCtrl: PopoverController) {
     this.navCtrl = navCtrl;
     this.dataService = dataService;
+
+  }
+
+  ngAfterContentInit() {
   }
 
   ionViewDidLoad(){
@@ -46,7 +43,7 @@ export class HomePage {
 
         if(savedChecklists){
           savedChecklists.forEach((savedChecklist) =>{
-            let loadChecklist = new ChecklistModel(savedChecklist.title,savedChecklist.items);
+            let loadChecklist = new ChecklistModel(savedChecklist.title,savedChecklist.items,savedChecklist.color);
             this.checklists.push(loadChecklist);
 
             loadChecklist.checklist.subscribe(update => {
@@ -82,7 +79,8 @@ export class HomePage {
         {
           text: 'Guardar',
           handler: data =>{
-            let newChecklist = new ChecklistModel(data.name,[]);
+            let color = "yellow";
+            let newChecklist = new ChecklistModel(data.name,[],color);
             this.checklists.push(newChecklist);
 
             newChecklist.checklist.subscribe(update => {this.save()});
@@ -154,32 +152,19 @@ export class HomePage {
     prompt.present();
   }
 
+  addColor(checklist){
+    let index = this.checklists.indexOf(checklist);
+
+    if(index > -1){
+      this.checklists[index].setColor();
+      this.save();
+      this.presentToast("Color agregado!");
+    }
+  }
+
   save():void{
     Keyboard.close();
     this.dataService.save(this.checklists);
 
   }
-
-  public schedule() {
-    // LocalNotifications.schedule({
-    //   title: "Test Title",
-    //   text: "Delayed Notification",
-    //   at: new Date(new Date().getTime() + 5 * 1000),
-    //   sound: null
-    // });
-    this.navCtrl.push(NotificacionesPage);
-  }
-
-  presentPopover(ev) {
-
-    let popover = this.popoverCtrl.create(PopoverHomePage, {
-      contentEle: this.content.nativeElement,
-      textEle: this.text.nativeElement
-    });
-
-    popover.present({
-      ev: ev
-    });
-  }
-
 }

@@ -6,10 +6,6 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
-      </button>
-      <!--<button ion-button class="nav-buttons" icon-only (click)="schedule()"><ion-icon name="alert"></ion-icon></button>-->
       <button ion-button class="nav-buttons" icon-only (click)="addChecklist()"><ion-icon name="add"></ion-icon></button>
     </ion-buttons>
 
@@ -17,17 +13,18 @@
 </ion-header>
 
 <ion-content class="content">
-  <ion-list no-lines>
+  <ion-list #popoverContent no-lines>
     <ion-item-sliding *ngFor="let checklist of checklists">
 
-      <button ion-item #popoverContent class="group" (click)="viewChecklist(checklist)">
-        <h2 class="title" #popoverText>{{ checklist.title}}</h2>
+      <button  ion-item   class="group" (click)="viewChecklist(checklist)" [ngClass]="checklist.color">
+        <h2 class="title" >{{ checklist.title}}</h2>
         <span class="items">{{ checklist.items.length}} tareas</span>
       </button>
 
       <ion-item-options class="group-options">
         <button class="option-1" ion-button icon-only color="blue" (click)="renameChecklist(checklist)"><ion-icon name="clipboard"></ion-icon></button>
         <button class="option-2" ion-button icon-only color="danger" (click)="removeChecklist(checklist)"><ion-icon name="trash"></ion-icon></button>
+        <button class="option-3" ion-button icon-only color="secondary" (click)="addColor(checklist)"><ion-icon name="brush"></ion-icon></button>
       </ion-item-options>
 
     </ion-item-sliding>
